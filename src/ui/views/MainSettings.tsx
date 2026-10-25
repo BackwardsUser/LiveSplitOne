@@ -32,6 +32,7 @@ export interface GeneralSettings {
     showControlButtons: boolean;
     showManualGameTime: ManualGameTimeSettings | false;
     saveOnReset: boolean;
+    bestTimesOnReset: BestTimesOnReset;
     speedrunComIntegration: boolean;
     serverUrl: string | undefined;
     theRunGgIntegration: TheRunGgSettings | undefined;
@@ -44,6 +45,15 @@ export interface TheRunGgSettings {
     liveTracking: boolean;
     statsUploading: boolean;
 }
+
+export type BestTimesOnReset =
+    | typeof BEST_TIMES_ON_RESET_ASK
+    | typeof BEST_TIMES_ON_RESET_SAVE
+    | typeof BEST_TIMES_ON_RESET_DISCARD;
+
+export const BEST_TIMES_ON_RESET_ASK = "ask";
+export const BEST_TIMES_ON_RESET_SAVE = "save";
+export const BEST_TIMES_ON_RESET_DISCARD = "discard";
 
 export type ThemeMode =
     | typeof THEME_MODE_AUTOMATIC
@@ -277,6 +287,30 @@ export function View({
             },
         },
         {
+            text: resolve(Label.BestTimesOnReset, lang),
+            tooltip: resolve(Label.BestTimesOnResetDescription, lang),
+            value: {
+                CustomCombobox: {
+                    value: generalSettings.bestTimesOnReset,
+                    list: [
+                        [
+                            BEST_TIMES_ON_RESET_ASK,
+                            resolve(Label.BestTimesOnResetAsk, lang),
+                        ],
+                        [
+                            BEST_TIMES_ON_RESET_SAVE,
+                            resolve(Label.BestTimesOnResetSave, lang),
+                        ],
+                        [
+                            BEST_TIMES_ON_RESET_DISCARD,
+                            resolve(Label.BestTimesOnResetDiscard, lang),
+                        ],
+                    ] as [string, string][],
+                    mandatory: true,
+                },
+            },
+        },
+        {
             text: resolve(Label.ShowControlButtons, lang),
             tooltip: resolve(Label.ShowControlButtonsDescription, lang),
             value: { Bool: generalSettings.showControlButtons },
@@ -420,6 +454,22 @@ export function View({
                             }
                             break;
                         case 4:
+                            if ("String" in value) {
+                                const mode = value.String as BestTimesOnReset;
+                                if (
+                                    mode !== BEST_TIMES_ON_RESET_ASK &&
+                                    mode !== BEST_TIMES_ON_RESET_SAVE &&
+                                    mode !== BEST_TIMES_ON_RESET_DISCARD
+                                ) {
+                                    break;
+                                }
+                                setGeneralSettings({
+                                    ...generalSettings,
+                                    bestTimesOnReset: mode,
+                                });
+                            }
+                            break;
+                        case 5:
                             if ("Bool" in value) {
                                 setGeneralSettings({
                                     ...generalSettings,
@@ -427,7 +477,7 @@ export function View({
                                 });
                             }
                             break;
-                        case 5:
+                        case 6:
                             if ("Bool" in value) {
                                 setGeneralSettings({
                                     ...generalSettings,

@@ -40,7 +40,17 @@ export function resolveItalian(text: Label): string {
             return "Salva al reset";
         case Label.SaveOnResetDescription:
             return "Determina se salvare automaticamente gli split quando si resetta il timer.";
-        case Label.ShowControlButtons:
+
+        case Label.BestTimesOnReset:
+            return "Tempi migliori al reset";
+        case Label.BestTimesOnResetDescription:
+            return "Determina cosa succede ai nuovi tempi migliori quando resetti a metà di un tentativo. “Chiedi” mostra una conferma. “Salva sempre” e “Non salvare mai” resettano subito senza chiedere.";
+        case Label.BestTimesOnResetAsk:
+            return "Chiedi";
+        case Label.BestTimesOnResetSave:
+            return "Salva sempre";
+        case Label.BestTimesOnResetDiscard:
+            return "Non salvare mai";        case Label.ShowControlButtons:
             return "Mostra pulsanti di controllo";
         case Label.ShowControlButtonsDescription:
             return "Determina se mostrare pulsanti sotto il timer che consentono di controllarlo. Quando disattivati, devi usare le scorciatoie.";

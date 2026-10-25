@@ -40,7 +40,17 @@ export function resolveRussian(text: Label): string {
             return "Сохранять при сбросе";
         case Label.SaveOnResetDescription:
             return "Определяет, следует ли автоматически сохранять сплиты при сбросе таймера.";
-        case Label.ShowControlButtons:
+
+        case Label.BestTimesOnReset:
+            return "Лучшие времена при сбросе";
+        case Label.BestTimesOnResetDescription:
+            return "Определяет, что происходит с новыми лучшими временами при сбросе посреди попытки. «Спрашивать» показывает подтверждение. «Всегда сохранять» и «Никогда не сохранять» сбрасывают сразу, без вопроса.";
+        case Label.BestTimesOnResetAsk:
+            return "Спрашивать";
+        case Label.BestTimesOnResetSave:
+            return "Всегда сохранять";
+        case Label.BestTimesOnResetDiscard:
+            return "Никогда не сохранять";        case Label.ShowControlButtons:
             return "Показывать кнопки управления";
         case Label.ShowControlButtonsDescription:
             return "Определяет, следует ли показывать кнопки под таймером для управления им. Если отключено, нужно использовать горячие клавиши.";

@@ -40,7 +40,17 @@ export function resolveEnglish(text: Label): string {
             return "Save On Reset";
         case Label.SaveOnResetDescription:
             return "Determines whether to automatically save the splits when resetting the timer.";
-        case Label.ShowControlButtons:
+
+        case Label.BestTimesOnReset:
+            return "Best Times On Reset";
+        case Label.BestTimesOnResetDescription:
+            return "Determines what happens to new best times when you reset in the middle of an attempt. “Ask” shows a confirmation dialog, which requires switching to the timer. “Always Save” and “Never Save” reset immediately without asking.";
+        case Label.BestTimesOnResetAsk:
+            return "Ask";
+        case Label.BestTimesOnResetSave:
+            return "Always Save";
+        case Label.BestTimesOnResetDiscard:
+            return "Never Save";        case Label.ShowControlButtons:
             return "Show Control Buttons";
         case Label.ShowControlButtonsDescription:
             return "Determines whether to show buttons beneath the timer that allow controlling it. When disabled, you have to use the hotkeys instead.";

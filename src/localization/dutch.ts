@@ -40,7 +40,17 @@ export function resolveDutch(text: Label): string {
             return "Opslaan bij reset";
         case Label.SaveOnResetDescription:
             return "Bepaalt of de splits automatisch worden opgeslagen bij het resetten van de timer.";
-        case Label.ShowControlButtons:
+
+        case Label.BestTimesOnReset:
+            return "Beste tijden bij resetten";
+        case Label.BestTimesOnResetDescription:
+            return "Bepaalt wat er met nieuwe beste tijden gebeurt als je tijdens een poging reset. “Vragen” toont een bevestiging. “Altijd opslaan” en “Nooit opslaan” resetten direct zonder te vragen.";
+        case Label.BestTimesOnResetAsk:
+            return "Vragen";
+        case Label.BestTimesOnResetSave:
+            return "Altijd opslaan";
+        case Label.BestTimesOnResetDiscard:
+            return "Nooit opslaan";        case Label.ShowControlButtons:
             return "Bedieningsknoppen tonen";
         case Label.ShowControlButtonsDescription:
             return "Bepaalt of er knoppen onder de timer worden getoond om deze te bedienen. Als dit is uitgeschakeld, moet je de sneltoetsen gebruiken.";

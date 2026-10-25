@@ -40,7 +40,17 @@ export function resolvePolish(text: Label): string {
             return "Zapisuj przy resecie";
         case Label.SaveOnResetDescription:
             return "Określa, czy automatycznie zapisywać splity podczas resetowania timera.";
-        case Label.ShowControlButtons:
+
+        case Label.BestTimesOnReset:
+            return "Najlepsze czasy przy resecie";
+        case Label.BestTimesOnResetDescription:
+            return "Określa, co dzieje się z nowymi najlepszymi czasami po zresetowaniu w trakcie próby. „Pytaj” pokazuje okno potwierdzenia. „Zawsze zapisuj” i „Nigdy nie zapisuj” resetują od razu bez pytania.";
+        case Label.BestTimesOnResetAsk:
+            return "Pytaj";
+        case Label.BestTimesOnResetSave:
+            return "Zawsze zapisuj";
+        case Label.BestTimesOnResetDiscard:
+            return "Nigdy nie zapisuj";        case Label.ShowControlButtons:
             return "Pokaż przyciski sterowania";
         case Label.ShowControlButtonsDescription:
             return "Określa, czy pokazywać przyciski pod timerem pozwalające nim sterować. Gdy wyłączone, musisz używać skrótów klawiszowych.";

@@ -40,7 +40,17 @@ export function resolveFrench(text: Label): string {
             return "Enregistrer lors de la réinitialisation";
         case Label.SaveOnResetDescription:
             return "Détermine s’il faut enregistrer automatiquement les splits lors de la réinitialisation du minuteur.";
-        case Label.ShowControlButtons:
+
+        case Label.BestTimesOnReset:
+            return "Meilleurs temps à la réinitialisation";
+        case Label.BestTimesOnResetDescription:
+            return "Détermine ce qu'il advient des nouveaux meilleurs temps lorsque vous réinitialisez en cours de tentative. « Demander » affiche une confirmation. « Toujours enregistrer » et « Ne jamais enregistrer » réinitialisent immédiatement sans demander.";
+        case Label.BestTimesOnResetAsk:
+            return "Demander";
+        case Label.BestTimesOnResetSave:
+            return "Toujours enregistrer";
+        case Label.BestTimesOnResetDiscard:
+            return "Ne jamais enregistrer";        case Label.ShowControlButtons:
             return "Afficher les boutons de contrôle";
         case Label.ShowControlButtonsDescription:
             return "Détermine s’il faut afficher des boutons sous le minuteur pour le contrôler. Lorsqu’ils sont désactivés, vous devez utiliser les raccourcis.";

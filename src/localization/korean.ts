@@ -40,7 +40,17 @@ export function resolveKorean(text: Label): string {
             return "리셋 시 저장";
         case Label.SaveOnResetDescription:
             return "타이머를 리셋할 때 스플릿을 자동으로 저장할지 여부를 결정합니다.";
-        case Label.ShowControlButtons:
+
+        case Label.BestTimesOnReset:
+            return "리셋 시 최고 기록";
+        case Label.BestTimesOnResetDescription:
+            return "시도 도중에 리셋할 때 새 최고 기록을 어떻게 처리할지 정합니다. “물어보기”는 확인 창을 표시합니다. “항상 저장”과 “저장 안 함”은 묻지 않고 바로 리셋합니다.";
+        case Label.BestTimesOnResetAsk:
+            return "물어보기";
+        case Label.BestTimesOnResetSave:
+            return "항상 저장";
+        case Label.BestTimesOnResetDiscard:
+            return "저장 안 함";        case Label.ShowControlButtons:
             return "제어 버튼 표시";
         case Label.ShowControlButtonsDescription:
             return "타이머 아래에 제어 버튼을 표시할지 여부를 결정합니다. 비활성화하면 단축키를 사용해야 합니다.";

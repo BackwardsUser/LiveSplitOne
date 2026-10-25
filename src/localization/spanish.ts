@@ -40,7 +40,17 @@ export function resolveSpanish(text: Label): string {
             return "Guardar al reiniciar";
         case Label.SaveOnResetDescription:
             return "Determina si los splits se guardan automáticamente al reiniciar el temporizador.";
-        case Label.ShowControlButtons:
+
+        case Label.BestTimesOnReset:
+            return "Mejores tiempos al reiniciar";
+        case Label.BestTimesOnResetDescription:
+            return "Determina qué ocurre con los nuevos mejores tiempos al reiniciar en mitad de un intento. «Preguntar» muestra una confirmación. «Guardar siempre» y «No guardar nunca» reinician de inmediato sin preguntar.";
+        case Label.BestTimesOnResetAsk:
+            return "Preguntar";
+        case Label.BestTimesOnResetSave:
+            return "Guardar siempre";
+        case Label.BestTimesOnResetDiscard:
+            return "No guardar nunca";        case Label.ShowControlButtons:
             return "Mostrar botones de control";
         case Label.ShowControlButtonsDescription:
             return "Determina si se muestran botones debajo del temporizador que permiten controlarlo. Cuando está desactivado, debes usar los atajos de teclado.";

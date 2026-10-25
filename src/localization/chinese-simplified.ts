@@ -40,7 +40,17 @@ export function resolveChineseSimplified(text: Label): string {
             return "重置时保存";
         case Label.SaveOnResetDescription:
             return "确定在重置计时器时是否自动保存分段。";
-        case Label.ShowControlButtons:
+
+        case Label.BestTimesOnReset:
+            return "重置时的最佳时间";
+        case Label.BestTimesOnResetDescription:
+            return "决定在尝试中途重置时如何处理新的最佳时间。“询问”会显示确认对话框。“始终保存”和“从不保存”会立即重置而不询问。";
+        case Label.BestTimesOnResetAsk:
+            return "询问";
+        case Label.BestTimesOnResetSave:
+            return "始终保存";
+        case Label.BestTimesOnResetDiscard:
+            return "从不保存";        case Label.ShowControlButtons:
             return "显示控制按钮";
         case Label.ShowControlButtonsDescription:
             return "确定是否在计时器下方显示用于控制的按钮。禁用后需要使用热键。";

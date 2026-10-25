@@ -34,6 +34,7 @@ import {
 import { LayoutEditor as LayoutEditorComponent } from "./views/LayoutEditor";
 import { RunEditor as RunEditorComponent } from "./views/RunEditor";
 import {
+    type BestTimesOnReset,
     type GeneralSettings,
     MainSettings as SettingsEditorComponent,
     THEME_MODE_AUTOMATIC,
@@ -311,6 +312,10 @@ export class LiveSplit extends React.Component<Props, State> {
 
     public getLang(): Language | undefined {
         return this.state.generalSettings.lang;
+    }
+
+    public getBestTimesOnReset(): BestTimesOnReset {
+        return this.state.generalSettings.bestTimesOnReset;
     }
 
     private notifyAboutUpdate() {

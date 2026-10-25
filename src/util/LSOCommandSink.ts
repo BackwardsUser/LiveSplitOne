@@ -22,6 +22,7 @@ import { WebCommandSink } from "../livesplit-core/livesplit_core";
 import { assert } from "./OptionUtil";
 import { showDialog } from "../ui/components/Dialog";
 import { Label, orAutoLang, resolve } from "../localization";
+import type { BestTimesOnReset } from "../ui/views/MainSettings";
 
 interface Callbacks {
     handleEvent(event: Event): void;
@@ -29,6 +30,7 @@ interface Callbacks {
     runNotModifiedAnymore(): void;
     encounteredCustomVariable(name: string): void;
     getLang(): Language | undefined;
+    getBestTimesOnReset(): BestTimesOnReset;
 }
 
 export class LSOCommandSink {
@@ -116,6 +118,15 @@ export class LSOCommandSink {
     public async reset(updateSplits?: boolean): Promise<CommandResult> {
         if (this.locked) {
             return CommandError.Busy;
+        }
+
+        const bestTimesOnReset = this.callbacks.getBestTimesOnReset();
+        if (updateSplits === undefined && this.timer.currentAttemptHasNewBestTimes()) {
+            if (bestTimesOnReset === "save") {
+                updateSplits = true;
+            } else if (bestTimesOnReset === "discard") {
+                updateSplits = false;
+            }
         }
 
         if (updateSplits === undefined && this.timer.currentAttemptHasNewBestTimes()) {

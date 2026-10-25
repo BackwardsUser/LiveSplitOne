@@ -5,6 +5,7 @@ import {
     type GeneralSettings,
     MANUAL_GAME_TIME_SETTINGS_DEFAULT,
     THEME_MODE_AUTOMATIC,
+    BEST_TIMES_ON_RESET_ASK,
 } from "../ui/views/MainSettings";
 import { FRAME_RATE_AUTOMATIC } from "../util/FrameRate";
 import { fromLocaleOpt, getLocaleOpt, setHtmlLang } from "../localization";
@@ -278,6 +279,8 @@ export async function loadGeneralSettings(): Promise<GeneralSettings> {
         showControlButtons: generalSettings.showControlButtons ?? !isTauri,
         showManualGameTime: generalSettings.showManualGameTime ?? false,
         saveOnReset: generalSettings.saveOnReset ?? false,
+        bestTimesOnReset:
+            generalSettings.bestTimesOnReset ?? BEST_TIMES_ON_RESET_ASK,
         speedrunComIntegration: generalSettings.speedrunComIntegration ?? true,
         serverUrl: generalSettings.serverUrl,
         theRunGgIntegration: generalSettings.theRunGgIntegration,

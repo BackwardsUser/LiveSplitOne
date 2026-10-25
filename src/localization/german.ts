@@ -40,7 +40,17 @@ export function resolveGerman(text: Label): string {
             return "Beim Zurücksetzen speichern";
         case Label.SaveOnResetDescription:
             return "Legt fest, ob die Splits beim Zurücksetzen des Timers automatisch gespeichert werden.";
-        case Label.ShowControlButtons:
+
+        case Label.BestTimesOnReset:
+            return "Bestzeiten beim Zurücksetzen";
+        case Label.BestTimesOnResetDescription:
+            return "Legt fest, was mit neuen Bestzeiten passiert, wenn der Timer während eines Versuchs zurückgesetzt wird. „Fragen“ zeigt einen Bestätigungsdialog an. „Immer speichern“ und „Nie speichern“ setzen sofort ohne Nachfrage zurück.";
+        case Label.BestTimesOnResetAsk:
+            return "Fragen";
+        case Label.BestTimesOnResetSave:
+            return "Immer speichern";
+        case Label.BestTimesOnResetDiscard:
+            return "Nie speichern";        case Label.ShowControlButtons:
             return "Steuerungsbuttons anzeigen";
         case Label.ShowControlButtonsDescription:
             return "Legt fest, ob unter dem Timer Schaltflächen angezeigt werden, mit denen er gesteuert werden kann. Wenn deaktiviert, müssen die Hotkeys verwendet werden.";

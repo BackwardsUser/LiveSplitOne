@@ -40,7 +40,17 @@ export function resolveJapanese(text: Label): string {
             return "リセット時に保存";
         case Label.SaveOnResetDescription:
             return "タイマーをリセットしたときにスプリットを自動的に保存するかどうかを決定します。";
-        case Label.ShowControlButtons:
+
+        case Label.BestTimesOnReset:
+            return "リセット時のベストタイム";
+        case Label.BestTimesOnResetDescription:
+            return "試行の途中でリセットしたときに、新しいベストタイムをどう扱うかを決めます。「確認する」は確認ダイアログを表示します。「常に保存」と「保存しない」は確認せずにすぐリセットします。";
+        case Label.BestTimesOnResetAsk:
+            return "確認する";
+        case Label.BestTimesOnResetSave:
+            return "常に保存";
+        case Label.BestTimesOnResetDiscard:
+            return "保存しない";        case Label.ShowControlButtons:
             return "操作ボタンを表示";
         case Label.ShowControlButtonsDescription:
             return "タイマー下に操作ボタンを表示するかどうかを決定します。無効にした場合はホットキーを使用する必要があります。";
