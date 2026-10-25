@@ -1,0 +1,93 @@
+name: Linux Desktop Build
+
+# Builds the Linux desktop app on this fork and attaches it to the run as a
+# downloadable artifact. Upstream only publishes builds from LiveSplit/LiveSplitOne.
+on:
+    push:
+        branches:
+            - "best-times-on-reset"
+    workflow_dispatch:
+
+jobs:
+    build:
+        if: github.repository != 'LiveSplit/LiveSplitOne'
+        runs-on: ubuntu-22.04
+        steps:
+            - name: Checkout commit
+              uses: actions/checkout@v6
+              with:
+                  submodules: recursive
+                  fetch-depth: 0
+
+            - name: Install Node
+              uses: actions/setup-node@v6
+              with:
+                  node-version: "lts/*"
+
+            - name: Install Rust
+              run: |
+                  rustup set profile minimal
+                  rustup toolchain install nightly \
+                    --component rust-src \
+                    --target wasm32-unknown-unknown
+                  rustup default nightly
+
+            - name: Install wasm-bindgen-cli
+              env:
+                  GH_TOKEN: ${{ github.token }}
+              run: |
+                  VERSION=$(cd livesplit-core && cargo tree -i wasm-bindgen --features wasm-web --target wasm32-unknown-unknown --depth 0 | sed 's/.* v//g')
+                  cd ~/.cargo/bin
+                  gh release download "$VERSION" \
+                    --repo rustwasm/wasm-bindgen \
+                    --pattern "wasm-bindgen-$VERSION-x86_64-unknown-linux-musl.tar.gz"
+                  tar -xzf "wasm-bindgen-$VERSION-x86_64-unknown-linux-musl.tar.gz"
+                  mv "wasm-bindgen-$VERSION-x86_64-unknown-linux-musl"/wasm* .
+
+            - name: Install native dependencies
+              run: |
+                  sudo apt update
+                  sudo apt install libwebkit2gtk-4.1-dev \
+                    build-essential \
+                    curl \
+                    wget \
+                    file \
+                    libxdo-dev \
+                    libssl-dev \
+                    libayatana-appindicator3-dev \
+                    librsvg2-dev
+
+            - name: Install npm packages
+              run: npm ci
+
+            - name: Build Core
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              run: npm run build:core:release
+
+            - name: Build Frontend
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              run: npm run tauri:build-html
+
+            - name: Generate Icons
+              run: npm run tauri:icons
+
+            - name: Build Desktop App
+              run: npx tauri build --no-bundle --ci
+
+            # Artifacts are zipped without file permissions, so wrap the binary
+            # in a tarball to keep it executable.
+            - name: Package
+              run: |
+                  stage=$(mktemp -d)
+                  cp "src-tauri/target/release/LiveSplit One" "$stage/livesplit-one" 2>/dev/null \
+                    || cp src-tauri/target/release/live-split-one "$stage/livesplit-one"
+                  tar czf LiveSplitOne-x86_64-linux.tar.gz -C "$stage" livesplit-one
+
+            - name: Upload
+              uses: actions/upload-artifact@v6
+              with:
+                  name: LiveSplitOne-x86_64-linux
+                  path: LiveSplitOne-x86_64-linux.tar.gz
+                  if-no-files-found: error
