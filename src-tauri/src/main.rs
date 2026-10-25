@@ -214,7 +214,22 @@ impl CommandSink for TauriCommandSink {
     }
 }
 
+/// WebKitGTK's DMA-BUF renderer fails on many NVIDIA + Wayland setups with
+/// "Error 71 (Protocol error) dispatching to Wayland display", so the window
+/// never appears. Disable it unless the user has set the variable themselves.
+#[cfg(target_os = "linux")]
+fn apply_webkit_workarounds() {
+    const VAR: &str = "WEBKIT_DISABLE_DMABUF_RENDERER";
+    if std::env::var_os(VAR).is_none() {
+        // Runs before any other threads are spawned, so this is sound.
+        std::env::set_var(VAR, "1");
+    }
+}
+
 fn main() {
+    #[cfg(target_os = "linux")]
+    apply_webkit_workarounds();
+
     let sink = TauriCommandSink(Arc::new(RwLock::new(None)));
     let hotkey_system = RwLock::new(HotkeySystem::new(sink.clone()).ok());
     tauri::Builder::default()
